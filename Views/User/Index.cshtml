@@ -4,7 +4,7 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>List of Freelancer Users</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -30,18 +30,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.hobby)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.createdBy)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.createdDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.updatedBy)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.updatedDate)
-            </th>
             <th></th>
         </tr>
     </thead>
@@ -65,18 +53,6 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.hobby)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.createdBy)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.createdDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.updatedBy)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.updatedDate)
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
