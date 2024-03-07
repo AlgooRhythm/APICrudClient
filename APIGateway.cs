@@ -8,13 +8,15 @@ namespace APICrudClient
     public class APIGateway
     {
         private string url = "https://localhost:7186/api/Home";
-        private string urlGetUser = "https://localhost:7186/api/Home/GetUsers/";
+        private string urlGetUser = "https://localhost:7186/api/Home/GetUsers";
+        private string urlArchivedUser = "https://localhost:7186/api/Home/ArchivedUser";
+        private string urlRestoreUser = "https://localhost:7186/api/Home/RestoreUser";
 
         private HttpClient httpClient = new HttpClient();
 
         public List<user> ListUsers(bool IsActiveUserOnly = false)
         {
-            url = urlGetUser + IsActiveUserOnly.ToString().ToLower();
+            url = urlGetUser + "/" + IsActiveUserOnly.ToString().ToLower();
 
             List<user> users = new List<user>();
             if(url.Trim().Substring(0, 5).ToLower() == "https")
@@ -132,6 +134,64 @@ namespace APICrudClient
                 }
             }
             catch(Exception ex)
+            {
+                throw new Exception("Error Occured at the API Endpoint, Error Info " + ex.Message);
+            }
+            finally { }
+
+            return;
+        }
+
+        public void ArchivedUser(int userId)
+        {
+            if (url.Trim().Substring(0, 5).ToLower() == "https")
+                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+
+            user users;
+            users = GetUser(userId);
+
+            url = urlArchivedUser + "/" + userId;
+            string json = JsonConvert.SerializeObject(users);
+
+            try
+            {
+                HttpResponseMessage response = httpClient.PutAsync(url, new StringContent(json, Encoding.UTF8, "application/json")).Result;
+                if (!response.IsSuccessStatusCode)
+                {
+                    string result = response.Content.ReadAsStringAsync().Result;
+                    throw new Exception("Error Occured at the API Endpoint, Error Info " + result);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error Occured at the API Endpoint, Error Info " + ex.Message);
+            }
+            finally { }
+
+            return;
+        }
+
+        public void RestoreUser(int userId)
+        {
+            if (url.Trim().Substring(0, 5).ToLower() == "https")
+                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+
+            user users;
+            users = GetUser(userId);
+
+            url = urlRestoreUser + "/" + userId;
+            string json = JsonConvert.SerializeObject(users);
+
+            try
+            {
+                HttpResponseMessage response = httpClient.PutAsync(url, new StringContent(json, Encoding.UTF8, "application/json")).Result;
+                if (!response.IsSuccessStatusCode)
+                {
+                    string result = response.Content.ReadAsStringAsync().Result;
+                    throw new Exception("Error Occured at the API Endpoint, Error Info " + result);
+                }
+            }
+            catch (Exception ex)
             {
                 throw new Exception("Error Occured at the API Endpoint, Error Info " + ex.Message);
             }

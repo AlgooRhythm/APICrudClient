@@ -1,12 +1,12 @@
 ﻿@model APICrudClient.Models.user
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "Restore";
 }
 
-<h1>Delete of Freelancer User</h1>
+<h1>Restore of Freelancer User</h1>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>Are you sure you want to restore this?</h3>
 <div>
     <hr />
     <dl class="row">
@@ -74,13 +74,9 @@
     </dl>
 
     <div style="display: inline-block;">
-        <form asp-action="Archived" method="post">
+        <form asp-action="RestoreUser" method="post">
             <input type="hidden" name="Id" value="@Model.id" />
-            <button type="submit" class="btn btn-warning">Archived</button>
-        </form>
-
-        <form asp-action="Delete" method="post">
-            <button type="submit" class="btn btn-danger">Delete Permanently</button>
+            <button type="submit" class="btn btn-success">Restore</button>
             <a asp-action="Index">Back to List</a>
         </form>
     </div>

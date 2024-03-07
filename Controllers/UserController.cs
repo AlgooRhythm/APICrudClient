@@ -65,6 +65,32 @@ namespace APICrudClient.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpPost]
+        public IActionResult Archived(int id)
+        {
+            apiGateway.ArchivedUser(id);
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public IActionResult Restore(int id)
+        {
+            user users;
+
+            users = apiGateway.GetUser(id);
+
+            return View(users);
+        }
+
+        [HttpPost]
+        public IActionResult RestoreUser(int id)
+        {
+            apiGateway.RestoreUser(id);
+
+            return RedirectToAction("Index");
+        }
+
         [HttpGet]
         public IActionResult Delete(int id)
         {
@@ -82,7 +108,5 @@ namespace APICrudClient.Controllers
 
             return RedirectToAction("Index");
         }
-
-
     }
 }

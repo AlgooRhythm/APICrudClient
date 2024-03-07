@@ -57,7 +57,16 @@
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
                 @Html.ActionLink("Details", "Details", new { id=item.id }) |
-                @Html.ActionLink("Delete", "Delete", new { id=item.id })
+                
+                @if (item.Status == 1)
+                {
+                        @Html.ActionLink("Delete", "Delete", new { id = item.id })
+                }
+                else if (item.Status == 0)
+                {
+                        @Html.ActionLink("Restore", "Restore", new { id = item.id })
+                }
+
             </td>
         </tr>
 }
