@@ -4,6 +4,9 @@ namespace APICrudClient.Models
 {
     public class BaseModel
     {
+        [DisplayName("Status")]
+        public int Status { get; set; }
+
         [DisplayName("Created By (UserId)")]
         public int createdBy { get; set; }
 

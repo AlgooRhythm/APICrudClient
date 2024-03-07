@@ -12,11 +12,11 @@ namespace APICrudClient.Controllers
             this.apiGateway = apiGateway;    
         }
 
-        public IActionResult Index()
+        public IActionResult Index(bool IsActiveUserOnly = false)
         {
             List<user> users;
 
-            users = apiGateway.ListUsers();
+            users = apiGateway.ListUsers(IsActiveUserOnly);
 
             return View(users);
         }
