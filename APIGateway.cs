@@ -8,17 +8,13 @@ namespace APICrudClient
     public class APIGateway
     {
         private string url = "https://localhost:7186/api/Home";
-        private string urlAllUser = "https://localhost:7186/api/Home/AllUsers";
-        private string urlActiveUser = "https://localhost:7186/api/Home/ActiveUsers";
+        private string urlGetUser = "https://localhost:7186/api/Home/GetUsers/";
 
         private HttpClient httpClient = new HttpClient();
 
         public List<user> ListUsers(bool IsActiveUserOnly = false)
         {
-            if (IsActiveUserOnly == false)
-                url = urlAllUser;
-            else
-                url = urlActiveUser;
+            url = urlGetUser + IsActiveUserOnly.ToString().ToLower();
 
             List<user> users = new List<user>();
             if(url.Trim().Substring(0, 5).ToLower() == "https")
